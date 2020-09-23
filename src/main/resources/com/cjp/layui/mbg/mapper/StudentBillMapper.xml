@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjp.layui.mbg.mapper.StudentBillMapper">
+  <resultMap id="BaseResultMap" type="com.cjp.layui.mbg.model.StudentBill">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="ordernum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="studentid" jdbcType="BIGINT" property="studentid" />
+    <result column="billid" jdbcType="BIGINT" property="billid" />
+    <result column="cost" jdbcType="DOUBLE" property="cost" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="paytype" jdbcType="INTEGER" property="paytype" />
+    <result column="grantid" jdbcType="BIGINT" property="grantid" />
+    <result column="paydate" jdbcType="TIMESTAMP" property="paydate" />
+    <result column="creatdate" jdbcType="TIMESTAMP" property="creatdate" />
+    <result column="rem" jdbcType="VARCHAR" property="rem" />
+    <result column="paymethod" jdbcType="INTEGER" property="paymethod" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="studentnm" jdbcType="VARCHAR" property="studentnm" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="teacherid" jdbcType="BIGINT" property="teacherid" />
+    <result column="intostatus" jdbcType="INTEGER" property="intostatus" />
+    <result column="rfcost" jdbcType="DOUBLE" property="rfcost" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ordernum, studentid, billid, cost, status, paytype, grantid, paydate, creatdate, 
+    rem, paymethod, deleted, studentnm, idcard, teacherid, intostatus, rfcost
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student_bill
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultType="java.lang.String">
+      select id from  student_bill
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from student_bill
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cjp.layui.mbg.model.StudentBill">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into student_bill (ordernum, studentid, billid, 
+      cost, status, paytype, 
+      grantid, paydate, creatdate, 
+      rem, paymethod, deleted, 
+      studentnm, idcard, teacherid, 
+      intostatus, rfcost)
+    values (#{ordernum,jdbcType=VARCHAR}, #{studentid,jdbcType=BIGINT}, #{billid,jdbcType=BIGINT}, 
+      #{cost,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{paytype,jdbcType=INTEGER}, 
+      #{grantid,jdbcType=BIGINT}, #{paydate,jdbcType=TIMESTAMP}, #{creatdate,jdbcType=TIMESTAMP}, 
+      #{rem,jdbcType=VARCHAR}, #{paymethod,jdbcType=INTEGER}, #{deleted,jdbcType=INTEGER}, 
+      #{studentnm,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{teacherid,jdbcType=BIGINT}, 
+      #{intostatus,jdbcType=INTEGER}, #{rfcost,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjp.layui.mbg.model.StudentBill">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into student_bill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ordernum != null">
+        ordernum,
+      </if>
+      <if test="studentid != null">
+        studentid,
+      </if>
+      <if test="billid != null">
+        billid,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="paytype != null">
+        paytype,
+      </if>
+      <if test="grantid != null">
+        grantid,
+      </if>
+      <if test="paydate != null">
+        paydate,
+      </if>
+      <if test="creatdate != null">
+        creatdate,
+      </if>
+      <if test="rem != null">
+        rem,
+      </if>
+      <if test="paymethod != null">
+        paymethod,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="studentnm != null">
+        studentnm,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="teacherid != null">
+        teacherid,
+      </if>
+      <if test="intostatus != null">
+        intostatus,
+      </if>
+      <if test="rfcost != null">
+        rfcost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="studentid != null">
+        #{studentid,jdbcType=BIGINT},
+      </if>
+      <if test="billid != null">
+        #{billid,jdbcType=BIGINT},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="paytype != null">
+        #{paytype,jdbcType=INTEGER},
+      </if>
+      <if test="grantid != null">
+        #{grantid,jdbcType=BIGINT},
+      </if>
+      <if test="paydate != null">
+        #{paydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatdate != null">
+        #{creatdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rem != null">
+        #{rem,jdbcType=VARCHAR},
+      </if>
+      <if test="paymethod != null">
+        #{paymethod,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="studentnm != null">
+        #{studentnm,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherid != null">
+        #{teacherid,jdbcType=BIGINT},
+      </if>
+      <if test="intostatus != null">
+        #{intostatus,jdbcType=INTEGER},
+      </if>
+      <if test="rfcost != null">
+        #{rfcost,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjp.layui.mbg.model.StudentBill">
+    update student_bill
+    <set>
+      <if test="ordernum != null">
+        ordernum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="studentid != null">
+        studentid = #{studentid,jdbcType=BIGINT},
+      </if>
+      <if test="billid != null">
+        billid = #{billid,jdbcType=BIGINT},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="paytype != null">
+        paytype = #{paytype,jdbcType=INTEGER},
+      </if>
+      <if test="grantid != null">
+        grantid = #{grantid,jdbcType=BIGINT},
+      </if>
+      <if test="paydate != null">
+        paydate = #{paydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatdate != null">
+        creatdate = #{creatdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rem != null">
+        rem = #{rem,jdbcType=VARCHAR},
+      </if>
+      <if test="paymethod != null">
+        paymethod = #{paymethod,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="studentnm != null">
+        studentnm = #{studentnm,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherid != null">
+        teacherid = #{teacherid,jdbcType=BIGINT},
+      </if>
+      <if test="intostatus != null">
+        intostatus = #{intostatus,jdbcType=INTEGER},
+      </if>
+      <if test="rfcost != null">
+        rfcost = #{rfcost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjp.layui.mbg.model.StudentBill">
+    update student_bill
+    set ordernum = #{ordernum,jdbcType=VARCHAR},
+      studentid = #{studentid,jdbcType=BIGINT},
+      billid = #{billid,jdbcType=BIGINT},
+      cost = #{cost,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      paytype = #{paytype,jdbcType=INTEGER},
+      grantid = #{grantid,jdbcType=BIGINT},
+      paydate = #{paydate,jdbcType=TIMESTAMP},
+      creatdate = #{creatdate,jdbcType=TIMESTAMP},
+      rem = #{rem,jdbcType=VARCHAR},
+      paymethod = #{paymethod,jdbcType=INTEGER},
+      deleted = #{deleted,jdbcType=INTEGER},
+      studentnm = #{studentnm,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      teacherid = #{teacherid,jdbcType=BIGINT},
+      intostatus = #{intostatus,jdbcType=INTEGER},
+      rfcost = #{rfcost,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="batchUpatePushtime">
+    update student_bill set rem = '批量更新' where id in  <foreach collection="list" item="sendOpenidList" open="(" close=")" separator=",">
+    #{sendOpenidList}
+  </foreach>
+  </update>
+</mapper>

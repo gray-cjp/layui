@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>layout CJP - Layui</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
+    <style>
+        .layui-table-cell {
+            height: inherit;
+        }
+    </style>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!--引入topbar-->
+    <div th:replace="bar/topbar::#topbar"></div>
+    <!--引入topbar-->
+    <div th:replace="bar/topbar::#sidebar(activeUri='productList')"></div>
+
+    <div class="layui-body" style="padding: 15px">
+        <form class="layui-form" action="">
+        <div  style="padding: 15px; border:1px solid #eeeeee;width: 96%;margin-left: 15px"  >
+            <div class="layui-row">
+                <div class="layui-icon layui-icon-search layui-col-md8">筛选搜索</div>
+                <div class="layui-col-md4">
+                    <button class="layui-btn layui-btn-sm" lay-event="getCheckData" style="float: right;margin-left: 10px" type="reset">重置</button>
+                    <button class="layui-btn layui-btn-sm" lay-event="getCheckData" style="float: right" type="submit">查询结果</button>
+                </div>
+            </div>
+            <div>
+                <div class="layui-row" style="margin-top: 10px">
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">输入搜索：</label>
+                        <div class="layui-input-block">
+                            <input type="text" style="width: 80%" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">商品货号：</label>
+                        <div class="layui-input-block">
+                            <input type="text" style="width: 80%" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">商品分类：</label>
+                        <div class="layui-input-block">
+                            <input type="text" style="width: 80%" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div  class="layui-row"  style="margin-top: 10px">
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">商品品牌：</label>
+                        <div class="layui-input-block">
+                            <input type="text" style="width: 80%" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">上架状态：</label>
+                        <div class="layui-input-block">
+                            <input type="text" style="width: 80%" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">审核状态：</label>
+                        <div class="layui-input-block">
+                            <input type="text" style="width: 80%" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <table id="demo" lay-filter="demo"></table>
+            <script type="text/html" id="toolbarDemo">
+                <div class="layui-btn-container">
+                    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">添加</button>
+                </div>
+            </script>
+            <script type="text/html" id="barDemo">
+                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a><br>
+                <a class="layui-btn layui-btn-xs" lay-event="edit">日志</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail">查看</a>
+            </script>
+            <script type="text/html" id="switchTpl">
+                <!-- 这里的 checked 的状态只是演示 -->
+                <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="新品|旧品" lay-filter="sexDemo" checked><br>
+                <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="上架|下架" lay-filter="sexDemo" checked><br>
+                <input type="checkbox" name="sex" value="{{d.id}}" lay-skin="switch" lay-text="推荐|不推荐" lay-filter="sexDemo" checked>
+            </script>
+
+            <script type="text/html" id="checkboxTpl">
+                 <!--这里的 checked 的状态只是演示 -->
+                 <button class="layui-icon   layui-icon-edit" lay-event="getCheckData"></button>
+
+            </script>
+            <script th:src="@{/layui/layui.js}"></script>
+            <script>
+                //JavaScript代码区域
+                layui.use('element', function(){
+                    var element = layui.element;
+
+                });
+            </script>
+            <script>
+                layui.use('table', function(){
+                    var table = layui.table;
+
+                    table.render({
+                        elem: '#demo'
+                        ,url: 'getdata' //数据接口
+                        ,toolbar:'#toolbarDemo'
+                        ,done: function (res, curr, count) {
+                                $("table").css("width", "100%");
+                                $("table").css("height", "100%");
+                            }
+                        ,parseData: function(res){ //res 即为原始返回的数据
+                            return {
+                                "code": 0, //解析接口状态
+                                "msg": "", //解析提示文本
+                                "count": res.count, //解析数据长度
+                                "data": res.data.list //解析数据列表
+                            };
+                        }
+                        ,page: true //开启分页
+                        , cols: [
+                            [
+                                {type: 'checkbox'}
+                                ,{field: 'id', title: '编号',sort: true}
+                                , {field: 'brand_id', title: '商品图片'}
+                                , {field: 'product_category_id', title: '商品名称', width: 150}
+                                , {field: 'name', title: '价格/货号'}
+                                ,{field:'sex', title:'标签', width:85, templet: '#switchTpl', unresize: true}
+                                , {field: 'pic', title: '排序'}
+                                ,{field:'lock', title:'SUK库存', width:110, templet: '#checkboxTpl', unresize: true,align:'center'}
+                                , {field: 'product_sn', title: '销量'}
+                                , {field: 'delete_status', title: '审核状态'}
+                                ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150,align:'center'}
+                            ]
+                        ]
+                        , limit: 10   //默认十条数据一页
+                        , limits: [10, 20, 30, 50]  //数据分页条
+                    });
+                    //监听行工具事件
+                    table.on('tool(demo)', function(obj){
+                        var data = obj.data;
+                        //console.log(obj)
+                        if(obj.event === 'del'){
+                            layer.confirm('真的删除行么', function(index){
+                                obj.del();
+                                layer.close(index);
+                            });
+                        } else if(obj.event === 'edit'){
+                            layer.prompt({
+                                formType: 2
+                                ,value: data.email
+                            }, function(value, index){
+                                obj.update({
+                                    email: value
+                                });
+                                layer.close(index);
+                            });
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+    <div th:replace="bar/topbar::#footerbar"></div>
+</div>
+</body>
+</html>

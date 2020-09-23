@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjp.layui.mbg.mapper.SubscribeAuditionMapper">
+  <resultMap id="BaseResultMap" type="com.cjp.layui.mbg.model.SubscribeAudition">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="businessid" jdbcType="VARCHAR" property="businessid" />
+    <result column="businessname" jdbcType="VARCHAR" property="businessname" />
+    <result column="brandname" jdbcType="VARCHAR" property="brandname" />
+    <result column="branchschool" jdbcType="VARCHAR" property="branchschool" />
+    <result column="course" jdbcType="VARCHAR" property="course" />
+    <result column="subscribename" jdbcType="VARCHAR" property="subscribename" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="subscribetime" jdbcType="TIMESTAMP" property="subscribetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, businessid, businessname, brandname, branchschool, course, subscribename, phone, 
+    subscribetime, status, grade, openid, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from subscribe_audition
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from subscribe_audition
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cjp.layui.mbg.model.SubscribeAudition">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into subscribe_audition (businessid, businessname, brandname, 
+      branchschool, course, subscribename, 
+      phone, subscribetime, status, 
+      grade, openid, createtime
+      )
+    values (#{businessid,jdbcType=VARCHAR}, #{businessname,jdbcType=VARCHAR}, #{brandname,jdbcType=VARCHAR}, 
+      #{branchschool,jdbcType=VARCHAR}, #{course,jdbcType=VARCHAR}, #{subscribename,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{subscribetime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{grade,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjp.layui.mbg.model.SubscribeAudition">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into subscribe_audition
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="businessid != null">
+        businessid,
+      </if>
+      <if test="businessname != null">
+        businessname,
+      </if>
+      <if test="brandname != null">
+        brandname,
+      </if>
+      <if test="branchschool != null">
+        branchschool,
+      </if>
+      <if test="course != null">
+        course,
+      </if>
+      <if test="subscribename != null">
+        subscribename,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="subscribetime != null">
+        subscribetime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="businessid != null">
+        #{businessid,jdbcType=VARCHAR},
+      </if>
+      <if test="businessname != null">
+        #{businessname,jdbcType=VARCHAR},
+      </if>
+      <if test="brandname != null">
+        #{brandname,jdbcType=VARCHAR},
+      </if>
+      <if test="branchschool != null">
+        #{branchschool,jdbcType=VARCHAR},
+      </if>
+      <if test="course != null">
+        #{course,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribename != null">
+        #{subscribename,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribetime != null">
+        #{subscribetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjp.layui.mbg.model.SubscribeAudition">
+    update subscribe_audition
+    <set>
+      <if test="businessid != null">
+        businessid = #{businessid,jdbcType=VARCHAR},
+      </if>
+      <if test="businessname != null">
+        businessname = #{businessname,jdbcType=VARCHAR},
+      </if>
+      <if test="brandname != null">
+        brandname = #{brandname,jdbcType=VARCHAR},
+      </if>
+      <if test="branchschool != null">
+        branchschool = #{branchschool,jdbcType=VARCHAR},
+      </if>
+      <if test="course != null">
+        course = #{course,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribename != null">
+        subscribename = #{subscribename,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribetime != null">
+        subscribetime = #{subscribetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjp.layui.mbg.model.SubscribeAudition">
+    update subscribe_audition
+    set businessid = #{businessid,jdbcType=VARCHAR},
+      businessname = #{businessname,jdbcType=VARCHAR},
+      brandname = #{brandname,jdbcType=VARCHAR},
+      branchschool = #{branchschool,jdbcType=VARCHAR},
+      course = #{course,jdbcType=VARCHAR},
+      subscribename = #{subscribename,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      subscribetime = #{subscribetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      grade = #{grade,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

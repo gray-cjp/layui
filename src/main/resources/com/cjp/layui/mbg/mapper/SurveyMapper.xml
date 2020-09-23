@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjp.layui.mbg.mapper.SurveyMapper">
+  <resultMap id="BaseResultMap" type="com.cjp.layui.mbg.model.Survey">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="question_time" jdbcType="TIMESTAMP" property="questionTime" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="question1" jdbcType="VARCHAR" property="question1" />
+    <result column="question2" jdbcType="VARCHAR" property="question2" />
+    <result column="question3" jdbcType="VARCHAR" property="question3" />
+    <result column="question4" jdbcType="VARCHAR" property="question4" />
+    <result column="question5" jdbcType="VARCHAR" property="question5" />
+    <result column="question6" jdbcType="VARCHAR" property="question6" />
+    <result column="question7" jdbcType="VARCHAR" property="question7" />
+    <result column="question8" jdbcType="VARCHAR" property="question8" />
+    <result column="question9" jdbcType="VARCHAR" property="question9" />
+    <result column="question10" jdbcType="VARCHAR" property="question10" />
+    <result column="question11" jdbcType="VARCHAR" property="question11" />
+    <result column="question12" jdbcType="VARCHAR" property="question12" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="success" jdbcType="INTEGER" property="success" />
+    <result column="ispay" jdbcType="INTEGER" property="ispay" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, question_time, openid, question1, question2, question3, question4, question5, 
+    question6, question7, question8, question9, question10, question11, question12, status, 
+    success, ispay
+  </sql>
+  <select id="selectByExample" parameterType="com.cjp.layui.mbg.model.SurveyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from survey
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from survey
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from survey
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cjp.layui.mbg.model.SurveyExample">
+    delete from survey
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cjp.layui.mbg.model.Survey">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey (question_time, openid, question1, 
+      question2, question3, question4, 
+      question5, question6, question7, 
+      question8, question9, question10, 
+      question11, question12, status, 
+      success, ispay)
+    values (#{questionTime,jdbcType=TIMESTAMP}, #{openid,jdbcType=VARCHAR}, #{question1,jdbcType=VARCHAR}, 
+      #{question2,jdbcType=VARCHAR}, #{question3,jdbcType=VARCHAR}, #{question4,jdbcType=VARCHAR}, 
+      #{question5,jdbcType=VARCHAR}, #{question6,jdbcType=VARCHAR}, #{question7,jdbcType=VARCHAR}, 
+      #{question8,jdbcType=VARCHAR}, #{question9,jdbcType=VARCHAR}, #{question10,jdbcType=VARCHAR}, 
+      #{question11,jdbcType=VARCHAR}, #{question12,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{success,jdbcType=INTEGER}, #{ispay,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjp.layui.mbg.model.Survey">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into survey
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="questionTime != null">
+        question_time,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="question1 != null">
+        question1,
+      </if>
+      <if test="question2 != null">
+        question2,
+      </if>
+      <if test="question3 != null">
+        question3,
+      </if>
+      <if test="question4 != null">
+        question4,
+      </if>
+      <if test="question5 != null">
+        question5,
+      </if>
+      <if test="question6 != null">
+        question6,
+      </if>
+      <if test="question7 != null">
+        question7,
+      </if>
+      <if test="question8 != null">
+        question8,
+      </if>
+      <if test="question9 != null">
+        question9,
+      </if>
+      <if test="question10 != null">
+        question10,
+      </if>
+      <if test="question11 != null">
+        question11,
+      </if>
+      <if test="question12 != null">
+        question12,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="success != null">
+        success,
+      </if>
+      <if test="ispay != null">
+        ispay,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="questionTime != null">
+        #{questionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="question1 != null">
+        #{question1,jdbcType=VARCHAR},
+      </if>
+      <if test="question2 != null">
+        #{question2,jdbcType=VARCHAR},
+      </if>
+      <if test="question3 != null">
+        #{question3,jdbcType=VARCHAR},
+      </if>
+      <if test="question4 != null">
+        #{question4,jdbcType=VARCHAR},
+      </if>
+      <if test="question5 != null">
+        #{question5,jdbcType=VARCHAR},
+      </if>
+      <if test="question6 != null">
+        #{question6,jdbcType=VARCHAR},
+      </if>
+      <if test="question7 != null">
+        #{question7,jdbcType=VARCHAR},
+      </if>
+      <if test="question8 != null">
+        #{question8,jdbcType=VARCHAR},
+      </if>
+      <if test="question9 != null">
+        #{question9,jdbcType=VARCHAR},
+      </if>
+      <if test="question10 != null">
+        #{question10,jdbcType=VARCHAR},
+      </if>
+      <if test="question11 != null">
+        #{question11,jdbcType=VARCHAR},
+      </if>
+      <if test="question12 != null">
+        #{question12,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="success != null">
+        #{success,jdbcType=INTEGER},
+      </if>
+      <if test="ispay != null">
+        #{ispay,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cjp.layui.mbg.model.SurveyExample" resultType="java.lang.Long">
+    select count(*) from survey
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update survey
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.questionTime != null">
+        question_time = #{record.questionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.openid != null">
+        openid = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question1 != null">
+        question1 = #{record.question1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question2 != null">
+        question2 = #{record.question2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question3 != null">
+        question3 = #{record.question3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question4 != null">
+        question4 = #{record.question4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question5 != null">
+        question5 = #{record.question5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question6 != null">
+        question6 = #{record.question6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question7 != null">
+        question7 = #{record.question7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question8 != null">
+        question8 = #{record.question8,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question9 != null">
+        question9 = #{record.question9,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question10 != null">
+        question10 = #{record.question10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question11 != null">
+        question11 = #{record.question11,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question12 != null">
+        question12 = #{record.question12,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.success != null">
+        success = #{record.success,jdbcType=INTEGER},
+      </if>
+      <if test="record.ispay != null">
+        ispay = #{record.ispay,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update survey
+    set id = #{record.id,jdbcType=BIGINT},
+      question_time = #{record.questionTime,jdbcType=TIMESTAMP},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      question1 = #{record.question1,jdbcType=VARCHAR},
+      question2 = #{record.question2,jdbcType=VARCHAR},
+      question3 = #{record.question3,jdbcType=VARCHAR},
+      question4 = #{record.question4,jdbcType=VARCHAR},
+      question5 = #{record.question5,jdbcType=VARCHAR},
+      question6 = #{record.question6,jdbcType=VARCHAR},
+      question7 = #{record.question7,jdbcType=VARCHAR},
+      question8 = #{record.question8,jdbcType=VARCHAR},
+      question9 = #{record.question9,jdbcType=VARCHAR},
+      question10 = #{record.question10,jdbcType=VARCHAR},
+      question11 = #{record.question11,jdbcType=VARCHAR},
+      question12 = #{record.question12,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      success = #{record.success,jdbcType=INTEGER},
+      ispay = #{record.ispay,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjp.layui.mbg.model.Survey">
+    update survey
+    <set>
+      <if test="questionTime != null">
+        question_time = #{questionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="question1 != null">
+        question1 = #{question1,jdbcType=VARCHAR},
+      </if>
+      <if test="question2 != null">
+        question2 = #{question2,jdbcType=VARCHAR},
+      </if>
+      <if test="question3 != null">
+        question3 = #{question3,jdbcType=VARCHAR},
+      </if>
+      <if test="question4 != null">
+        question4 = #{question4,jdbcType=VARCHAR},
+      </if>
+      <if test="question5 != null">
+        question5 = #{question5,jdbcType=VARCHAR},
+      </if>
+      <if test="question6 != null">
+        question6 = #{question6,jdbcType=VARCHAR},
+      </if>
+      <if test="question7 != null">
+        question7 = #{question7,jdbcType=VARCHAR},
+      </if>
+      <if test="question8 != null">
+        question8 = #{question8,jdbcType=VARCHAR},
+      </if>
+      <if test="question9 != null">
+        question9 = #{question9,jdbcType=VARCHAR},
+      </if>
+      <if test="question10 != null">
+        question10 = #{question10,jdbcType=VARCHAR},
+      </if>
+      <if test="question11 != null">
+        question11 = #{question11,jdbcType=VARCHAR},
+      </if>
+      <if test="question12 != null">
+        question12 = #{question12,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="success != null">
+        success = #{success,jdbcType=INTEGER},
+      </if>
+      <if test="ispay != null">
+        ispay = #{ispay,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjp.layui.mbg.model.Survey">
+    update survey
+    set question_time = #{questionTime,jdbcType=TIMESTAMP},
+      openid = #{openid,jdbcType=VARCHAR},
+      question1 = #{question1,jdbcType=VARCHAR},
+      question2 = #{question2,jdbcType=VARCHAR},
+      question3 = #{question3,jdbcType=VARCHAR},
+      question4 = #{question4,jdbcType=VARCHAR},
+      question5 = #{question5,jdbcType=VARCHAR},
+      question6 = #{question6,jdbcType=VARCHAR},
+      question7 = #{question7,jdbcType=VARCHAR},
+      question8 = #{question8,jdbcType=VARCHAR},
+      question9 = #{question9,jdbcType=VARCHAR},
+      question10 = #{question10,jdbcType=VARCHAR},
+      question11 = #{question11,jdbcType=VARCHAR},
+      question12 = #{question12,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      success = #{success,jdbcType=INTEGER},
+      ispay = #{ispay,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectopenid" resultType="java.util.List">
+    SELECT DISTINCT a.openid FROM studentorder a INNER JOIN we_user b ON a.openid = b.openid WHERE a.`status` = 1 AND a.cost >20 AND a.paydate >= 2020-01-15;
+  </select>
+</mapper>

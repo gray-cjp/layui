@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cjp.layui.mbg.mapper.FindPageFuctionMapper">
+  <resultMap id="BaseResultMap" type="com.cjp.layui.mbg.model.FindPageFuction">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="function" jdbcType="VARCHAR" property="function" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="urltype" jdbcType="INTEGER" property="urltype" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, function, icon, urltype, deleted, url, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from findpage_function
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from findpage_function
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cjp.layui.mbg.model.FindPageFuction">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into findpage_function (function, icon, urltype, 
+      deleted, url, createtime
+      )
+    values (#{function,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{urltype,jdbcType=INTEGER}, 
+      #{deleted,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cjp.layui.mbg.model.FindPageFuction">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into findpage_function
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="function != null">
+        function,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="urltype != null">
+        urltype,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="function != null">
+        #{function,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="urltype != null">
+        #{urltype,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cjp.layui.mbg.model.FindPageFuction">
+    update findpage_function
+    <set>
+      <if test="function != null">
+        function = #{function,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="urltype != null">
+        urltype = #{urltype,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cjp.layui.mbg.model.FindPageFuction">
+    update findpage_function
+    set function = #{function,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      urltype = #{urltype,jdbcType=INTEGER},
+      deleted = #{deleted,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
