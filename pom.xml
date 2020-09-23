@@ -125,11 +125,6 @@
             <artifactId>tomcat-embed-jasper</artifactId>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-com.AiCenter.cente.generator</artifactId>
-            <version>${mybatis-plus.version}</version>
-        </dependency>
         <!--Swagger-UI API文档生产工具-->
    <!--     <dependency>
             <groupId>io.springfox</groupId>
