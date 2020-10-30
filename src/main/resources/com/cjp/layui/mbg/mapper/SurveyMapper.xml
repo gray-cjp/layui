@@ -414,7 +414,10 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectopenid" resultType="java.util.List">
+  <select id="selectopenid" resultType="java.lang.String">
     SELECT DISTINCT a.openid FROM studentorder a INNER JOIN we_user b ON a.openid = b.openid WHERE a.`status` = 1 AND a.cost >20 AND a.paydate >= 2020-01-15;
   </select>
+    <select id="selectAll" resultType="java.util.LinkedHashMap">
+      select id,phone,expressno from  book2  where  id  between 2001 and  2010;
+    </select>
 </mapper>

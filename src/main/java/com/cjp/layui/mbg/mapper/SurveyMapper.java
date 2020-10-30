@@ -3,6 +3,8 @@ package com.cjp.layui.mbg.mapper;
 import com.cjp.layui.mbg.model.Survey;
 import com.cjp.layui.mbg.model.SurveyExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface SurveyMapper {
@@ -29,4 +31,6 @@ public interface SurveyMapper {
     int updateByPrimaryKey(Survey record);
 
     List<String> selectopenid();
+
+    List<Map<String, String>> selectAll();
 }
